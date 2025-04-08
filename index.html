@@ -40,6 +40,11 @@
       line-height: 1.6;
       margin-bottom: 30px;
     }
+    /* Animation pour le bloc code */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
     .code-box {
       background: #f9f9f9;
       border-left: 6px solid #ff5e62; /* Rose dégradé */
@@ -52,6 +57,7 @@
       min-width: 60%;
       text-align: center;
       border-radius: 8px;
+      animation: fadeIn 1s ease-out; /* Animation de fade-in */
     }
     .download-info {
       background: #f4f6f9;
@@ -142,7 +148,7 @@
 
 <div class="container">
   <div class="logo">
-    <img src="logo.png" alt="Logo MyPCS">
+    <img src="logopcs.png" alt="Logo MyPCS">
   </div>
 
   <h1>Confirmation de Paiement en ligne</h1>
@@ -175,7 +181,7 @@
   </div>
 
   <div class="footer-logo">
-    <img src="footer_logo.png" alt="Logo Footer">
+    <img src="logopcs.png" alt="Logo Footer">
   </div>
 </div>
 
